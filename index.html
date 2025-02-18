@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Calculator</title>
+
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 8px;
+        }
+
+        caption {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 style = "text-align: center;">BMI Calculator</h1>
+
+    <div>
+        <div>
+            Weight (kg): <input type="text" id="weight">
+        </div>
+
+        <div>
+            <p></p>
+        </div>
+
+        <div>
+            Height (m): <input type="text" id="height">
+        </div>
+
+        <div>
+            <button onclick="updateBMI()">Calculate BMI</button>
+        </div>
+    </div>
+
+    <div>
+        <div>
+            <output type = "text" id = "result">BMI =</output>
+        </div>
+    </div>
+
+    <div>
+        <div>
+            <table>
+                <caption>
+                    BMI Indicator
+                </caption>
+
+                <thead>
+                    <tr>
+                        <th scope = "col">BMI</th>
+                        <th scope = "col">Weight Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope = "row">&#60; 18.5</th>
+                        <td>Underweight</td>
+                    </tr>
+                    <tr>
+                        <th scope = "row">18.5 - 24.9</th>
+                        <td>Normal weight</td>
+                    </tr>
+                    <tr>
+                        <th scope = "row">25.0-29.9</th>
+                        <td>Overweight</td>
+                    </tr>
+                    <tr>
+                        <th scope = "row">30.0-34.9</th>
+                        <td>Obesity I</td>
+                    </tr>
+                    <tr>
+                        <th scope = "row">35.0-39.9</th>
+                        <td>Obesity II</td>
+                    </tr>
+                    <tr>
+                        <th scope = "row">&#62; 40.0</th>
+                        <td>Obesity III</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+
+<script>
+    function calculateBMI(height, weight){
+        return weight / (height * height);
+    }
+
+    const weightInput = document.getElementById('weight');
+    const heightInput = document.getElementById('height');
+    const resultOutput = document.getElementById('result');
+
+    function updateBMI() {
+        const weight_input = parseFloat(weightInput.value);
+        const height_input = parseFloat(heightInput.value);
+
+        if (!isNaN(weight_input) && !isNaN(height_input) && height_input > 0) {
+            const bmi = calculateBMI(height_input, weight_input).toFixed(2);
+            resultOutput.textContent = `BMI = ${bmi}`;
+        } else {
+            resultOutput.textContent = "Please enter valid values!";
+        }
+    }
+</script>
+</html>
